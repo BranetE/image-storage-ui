@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from "react";
-import type { ImageItem } from "../services/types";
+import type { ImageType } from "../services/types";
 import { fetchAllImages, searchImages, uploadImage } from "../services/api";
 
 const useImages = () => {
-  const [images, setImages] = useState<ImageItem[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [uploading, setUploading] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [error, setError] = useState("");
+  const [images, setImages] = useState<ImageType[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [uploading, setUploading] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [error, setError] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleSearch = async (e: React.FormEvent | React.MouseEvent) => {

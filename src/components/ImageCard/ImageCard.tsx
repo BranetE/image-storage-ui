@@ -1,6 +1,6 @@
-import type { ImageItem } from "../../services/types";
+import type { ImageType } from "../../services/types";
 
-const ImageCard = (image: ImageItem) => {
+const ImageCard = (image: ImageType) => {
   return (
     <div
       key={image.id}
