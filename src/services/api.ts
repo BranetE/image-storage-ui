@@ -18,7 +18,7 @@ export const searchImages = async (keyword: string): Promise<ImageType[]> => {
     throw new Error(`Search failed: ${response.statusText}`);
   }
 
-  const searchResults = await response.json();
+  // const searchResults = await response.json();
 
   return [];
 };
