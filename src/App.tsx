@@ -7,14 +7,9 @@ import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import UploadButton from "./components/UploadButton/UploadButton";
 import { useImagesContext } from "./hooks/useImagesContext";
-import { useEffect } from "react";
 
 const App: React.FC = () => {
   const { images, loading, error } = useImagesContext();
-
-  useEffect(() => {
-    console.log("Images changed", images);
-  }, [images]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
