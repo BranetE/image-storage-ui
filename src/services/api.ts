@@ -25,6 +25,16 @@ export const searchImages = async (keyword: string): Promise<ImageType[]> => {
 };
 
 export const uploadImage = async (file: File): Promise<void> => {
+  const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+  if (!allowedTypes.includes(file.type.toLowerCase())) {
+    throw new Error('Invalid file format. Only JPEG and PNG images are allowed.');
+  }
+
+  const maxSizeInMB = 5;
+  const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
+  if (file.size > maxSizeInBytes) {
+    throw new Error(`File size exceeds ${maxSizeInMB}MB limit.`);
+  }
   const response = await fetch(
     `${BASE_URL}/upload/${BUCKET_NAME}/${file.name.replace(/ /g,"_")}`,
     {

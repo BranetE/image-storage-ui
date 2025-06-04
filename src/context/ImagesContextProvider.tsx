@@ -20,7 +20,7 @@ const ImagesContextProvider: React.FC<{ children: React.ReactNode }> = ({
       const data = await searchImages(searchQuery);
       setImages(data);
     } catch (err) {
-      setError("Search failed");
+      setError(`Search failed: ${err}`);
       console.error("Search error:", err);
     } finally {
       setLoading(false);
@@ -51,7 +51,7 @@ const ImagesContextProvider: React.FC<{ children: React.ReactNode }> = ({
         setImages(data);
       }
     } catch (err) {
-      setError("Upload failed");
+      setError(`Upload failed: ${err}`);
       console.error("Upload error:", err);
     } finally {
       setUploading(false);
