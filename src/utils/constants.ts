@@ -1,2 +1,2 @@
-export const BASE_URL = "https://cppwm2vk5j.execute-api.eu-central-1.amazonaws.com/dev";
-export const BUCKET_NAME = "images-bucket-eu-central-1";
+export const BASE_URL = process.env.API_GATEWAY_URL;
+export const BUCKET_NAME = process.env.S3_BUCKET_NAME;
