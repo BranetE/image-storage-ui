@@ -3,7 +3,10 @@ import { BASE_URL, BUCKET_NAME } from "../utils/constants";
 
 export const searchImages = async (keyword: string): Promise<ImageType[]> => {
   const response = await fetch(
-    `${BASE_URL}/search?keyword=${encodeURIComponent(keyword)}`
+    `${BASE_URL}/search?keyword=${encodeURIComponent(keyword)}`,
+    {
+      method: "GET"
+    }
   );
 
   if (!response.ok) {
