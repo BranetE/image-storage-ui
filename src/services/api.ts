@@ -26,7 +26,7 @@ export const searchImages = async (keyword: string): Promise<ImageType[]> => {
 
 export const uploadImage = async (file: File): Promise<void> => {
   const response = await fetch(
-    `${BASE_URL}/upload/${BUCKET_NAME}/${file.name}`,
+    `${BASE_URL}/upload/${BUCKET_NAME}/${file.name.replace(/ /g,"_")}`,
     {
       method: "PUT",
       headers: {
