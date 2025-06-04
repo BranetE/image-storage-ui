@@ -11,9 +11,9 @@ import { useImagesContext } from "./hooks/useImagesContext";
 const App: React.FC = () => {
   const { images, loading, error } = useImagesContext();
 
-  console.log('All env vars:', process.env);
-  console.log('API Gateway URL:', process.env.REACT_APP_API_GATEWAY_URL);
-  console.log('S3 Bucket:', process.env.REACT_APP_S3_BUCKET_NAME);
+  console.log("All Vite env vars:", import.meta.env);
+  console.log("API Gateway URL:", import.meta.env.VITE_API_GATEWAY_URL);
+  console.log("S3 Bucket:", import.meta.env.VITE_S3_BUCKET_NAME);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
