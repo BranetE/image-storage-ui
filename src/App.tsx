@@ -11,6 +11,10 @@ import { useImagesContext } from "./hooks/useImagesContext";
 const App: React.FC = () => {
   const { images, loading, error } = useImagesContext();
 
+  console.log('All env vars:', process.env);
+  console.log('API Gateway URL:', process.env.REACT_APP_API_GATEWAY_URL);
+  console.log('S3 Bucket:', process.env.REACT_APP_S3_BUCKET_NAME);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="container mx-auto px-4 py-8">
