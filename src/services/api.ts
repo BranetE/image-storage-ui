@@ -1,8 +1,6 @@
 import type { ImageResponseType, ImageType } from "./types";
 import { BASE_URL, BUCKET_NAME } from "../utils/constants";
-import { v4 as uuidv4 } from "uuid";
 
-// Search images
 export const searchImages = async (keyword: string): Promise<ImageType[]> => {
   const response = await fetch(
     `${BASE_URL}/search?keyword=${encodeURIComponent(keyword)}`
@@ -23,13 +21,9 @@ export const searchImages = async (keyword: string): Promise<ImageType[]> => {
   );
 };
 
-// Upload image
 export const uploadImage = async (file: File): Promise<void> => {
-  const extension = file.name.split(".").pop();
-  const fileName = `${uuidv4()}.${extension}`;
-
   const response = await fetch(
-    `${BASE_URL}/upload/${BUCKET_NAME}/${fileName}`,
+    `${BASE_URL}/upload/${BUCKET_NAME}/${file.name}`,
     {
       method: "PUT",
       headers: {

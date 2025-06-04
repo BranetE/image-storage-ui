@@ -38,6 +38,7 @@ const ImagesContextProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const clearSearch = () => {
     setSearchQuery("");
+    setImages([])
   };
 
   const handleFileUpload = async (file: File) => {
@@ -71,7 +72,7 @@ const ImagesContextProvider: React.FC<{ children: React.ReactNode }> = ({
       fileInputRef,
       error,
     }),
-    [images, loading, uploading, searchQuery, fileInputRef]
+    [images, searchQuery, loading, uploading, error]
   );
   return (
     <ImagesContext.Provider value={value}>{children}</ImagesContext.Provider>
