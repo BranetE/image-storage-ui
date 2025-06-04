@@ -1,8 +1,8 @@
 import { Loader2, Upload } from "lucide-react";
-import useImages from "../../hooks/useImages";
+import { useImagesContext } from "../../hooks/useImagesContext";
 
 const UploadButton = () => {
-  const { uploading, handleFileSelect, fileInputRef } = useImages();
+  const { uploading, handleFileSelect, fileInputRef } = useImagesContext();
 
   return (
     <div className="relative">

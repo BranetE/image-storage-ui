@@ -1,8 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
+import { ImagesContext } from "./ImagesContext";
+import { searchImages, uploadImage } from "../services/api";
 import type { ImageType } from "../services/types";
-import { fetchAllImages, searchImages, uploadImage } from "../services/api";
 
-const useImages = () => {
+const ImagesContextProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [images, setImages] = useState<ImageType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [uploading, setUploading] = useState<boolean>(false);
@@ -14,13 +17,8 @@ const useImages = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      if (!searchQuery.trim()) {
-        const data = await fetchAllImages();
-        setImages(data);
-      } else {
-        const data = await searchImages(searchQuery);
-        setImages(data);
-      }
+      const data = await searchImages(searchQuery);
+      setImages(data);
     } catch (err) {
       setError("Search failed");
       console.error("Search error:", err);
@@ -40,21 +38,6 @@ const useImages = () => {
 
   const clearSearch = () => {
     setSearchQuery("");
-    loadAllImages();
-  };
-
-  const loadAllImages = async () => {
-    try {
-      setLoading(true);
-      setError("");
-      const data = await fetchAllImages();
-      setImages(data);
-    } catch (err) {
-      setError("Failed to load images");
-      console.error("Load error:", err);
-    } finally {
-      setLoading(false);
-    }
   };
 
   const handleFileUpload = async (file: File) => {
@@ -65,9 +48,6 @@ const useImages = () => {
       if (searchQuery.trim()) {
         const data = await searchImages(searchQuery);
         setImages(data);
-      } else {
-        const data = await fetchAllImages();
-        setImages(data);
       }
     } catch (err) {
       setError("Upload failed");
@@ -77,22 +57,25 @@ const useImages = () => {
     }
   };
 
-  useEffect(() => {
-    loadAllImages();
-  }, []);
-
-  return {
-    images,
-    handleSearch,
-    handleFileSelect,
-    clearSearch,
-    searchQuery,
-    setSearchQuery,
-    loading,
-    uploading,
-    fileInputRef,
-    error,
-  } as const;
+  const value = useMemo(
+    () => ({
+      images,
+      setImages,
+      handleSearch,
+      handleFileSelect,
+      clearSearch,
+      searchQuery,
+      setSearchQuery,
+      loading,
+      uploading,
+      fileInputRef,
+      error,
+    }),
+    [images, loading, uploading, searchQuery, fileInputRef]
+  );
+  return (
+    <ImagesContext.Provider value={value}>{children}</ImagesContext.Provider>
+  );
 };
 
-export default useImages;
+export default ImagesContextProvider;

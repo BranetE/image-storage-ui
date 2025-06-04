@@ -4,12 +4,17 @@ import SearchBar from "./components/SearchBar/SearchBar";
 import EmptyState from "./components/EmptyState/EmptyState";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
-import useImages from "./hooks/useImages";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import UploadButton from "./components/UploadButton/UploadButton";
+import { useImagesContext } from "./hooks/useImagesContext";
+import { useEffect } from "react";
 
 const App: React.FC = () => {
-  const { images, loading, error } = useImages();
+  const { images, loading, error } = useImagesContext();
+
+  useEffect(() => {
+    console.log("Images changed", images);
+  }, [images]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">

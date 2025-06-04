@@ -1,8 +1,8 @@
 import { FileImage } from "lucide-react";
-import useImages from "../../hooks/useImages";
+import { useImagesContext } from "../../hooks/useImagesContext";
 
 const EmptyState = () => {
-  const { searchQuery } = useImages();
+  const { searchQuery } = useImagesContext();
 
   return (
     <div className="text-center py-12">

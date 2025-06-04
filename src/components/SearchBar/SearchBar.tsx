@@ -1,9 +1,9 @@
 import { Search, X } from "lucide-react";
-import useImages from "../../hooks/useImages";
+import { useImagesContext } from "../../hooks/useImagesContext";
 
 const SearchBar = () => {
   const { searchQuery, setSearchQuery, handleSearch, clearSearch } =
-    useImages();
+    useImagesContext();
 
   return (
     <div className="flex items-center gap-2">
